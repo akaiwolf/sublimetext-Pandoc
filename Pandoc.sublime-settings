@@ -76,14 +76,31 @@
       },
 
       "Microsoft Word": {
+        "new-buffer":1,
         "scope": {
           "text.html": "html",
-          "text.html.markdown": "markdown"
+          "text.html.markdown": "markdown",
+          "text.md":"markdown",
         },
         "pandoc-arguments": [
           "-t", "docx"
-          // if -o or --output missing, will write to a temporary file
-          // "--output=~/Downloads/output.pdf"
+          // if -o or --output missing, will write to filename matching the file it was called from
+          // "--output=~/Downloads/output.docx"
+        ]
+      },
+
+      "Markdown to Latex":{
+        "new-buffer": 1,
+        "scope":{
+          "text.html": "html",
+          "text.html.markdown": "markdown",
+          "text.md": "markdown",
+        },
+        "syntax_file": "Packages/Latex/Latex.tmLanguage",
+        "pandoc-arguments":[
+          "-t","latex","-s"
+          // if -o or --output missing, will write to filename matching the file it was called from
+          // "--output=~/Downloads/output.tex"
         ]
       }
 
@@ -93,7 +110,7 @@
 
     // output formats that are written to file, using -o parameter. These we do
     // not output to a sublime text buffer.
-    "pandoc-format-file": ["docx", "epub", "pdf", "odt"]
+    "pandoc-format-file": ["docx", "epub", "pdf", "odt", "tex"]
 
   }
 

@@ -119,13 +119,20 @@ class PandocCommand(sublime_plugin.TextCommand):
         if oformat == 'pdf':
             args = args.remove(
                 short=['t', 'w'], long=['to', 'write'], values=['pdf'])
-
+        
+        # catch for tex files and format filename based on caller
+        if oformat == 'latex':
+            ifilename, ifileformat = self.view.file_name().split(".")
+            output_path = ifilename
+            output_path += ".tex"
+            args.extend(['-o', output_path])     
         # if write to file, add -o if necessary, set file path to output_path
-        if oformat is not None and oformat in _s('pandoc-format-file'):
+        elif oformat is not None and oformat in _s('pandoc-format-file'):
             output_path = args.get(short=['o'], long=['output'])
             if output_path is None:
-                # note the file extension matches the pandoc format name
-                output_path = tempfile.NamedTemporaryFile().name
+                # modified to follow calling filename when -o not provided by the user
+                ifilename, ifileformat = self.view.file_name().split(".")
+                output_path = ifilename
                 output_path += "." + oformat
                 args.extend(['-o', output_path])
 
