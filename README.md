@@ -22,3 +22,14 @@ Run Pandoc on the current document via the Command Palette (`Command+Shift+P` on
 You can fully configure the available formats, and configure the Pandoc options to customize transformation, via the [plugin settings file](http://docs.sublimetext.info/en/latest/customization/settings.html). Via the application menu, go to "Preferences" -> "Package Settings" -> "Pandoc".
 
 There are 2 possible top level settings keys, "user" and "default". If you use "default" in your user settings file, the default settings will be overwritten, but if you use "user" your settings will be merged into the default settings.
+
+## Notes
+
+The difference between this and the original plugin are as follows:
+
+- Adjusted default behaviour when file output required
+    + No longer need to specify a output file name
+    + Output filename will default to file base name from the calling file
+        * For example: converting a file testfile.md to latex will generate a file testfile.tex, or to docx where the file testfile.docx will be generated.
+- Added markdown to latex generation option under default sublime settings.
+- Updated default docx generation to use a buffer instead.
